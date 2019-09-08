@@ -1,0 +1,64 @@
+201903
+* 登录页面设计
+
+* 页面跳转
+
+* 用户数据库操作 JDBC
+- 建立数据库
+数据库t01
+    用户表
+    id          int        主键      自动增长     编号
+    account     varchar    允许空                账号
+    password    varchar    允许空                密码
+    name        varchar    允许空                姓名
+
+create table users
+(
+id int auto_increment,
+account varchar(20) null,
+password varchar(20) null,
+name varchar(20) null,
+constraint users_pk
+primary key (id)
+)
+comment '用户表';
+
+用户账号是唯一的
+alter table users
+	add constraint users_uni
+		unique (account);
+
+* DAO类
+- 步骤
+    1. 获取数据库连接
+    2. 拼接sql命令
+    3. 事务处理
+        绑定参数(注意: 从1开始)
+    4. 执行sql命令
+        获取结果ResultSet
+    5. 关闭连接
+
+* 实现注册功能: JDBC编程
+
+* 主界面
+    用户管理
+    签到情况
+
+* 签到表 sign
+id 编号 int
+userId 用户编号 int
+signDate 用户签到日期 varchar(50)
+
+
+* 使用session完成, 必须登录了才能访问main.jsp和sign.jsp
+
+* 完善注销功能
+
+* 使用cookie完成记住密码功能
+       如果需要使用cookie的页面不与当前页面同一目录下 需要**设置path值** 否则目录外的页面获取不到
+       [cookie未设置path引发的大坑……](https://blog.csdn.net/qq_29305911/article/details/53447284)
+
+* 完善签到表中的getAll()方法, 需要查出用户姓名
+    在修改了比较重要的基础文件 尽量重新启动Tomcat 否则会出现NoSuchMethodError错误 无法识别已被修改的方法
+
+* 完成搜索功能
