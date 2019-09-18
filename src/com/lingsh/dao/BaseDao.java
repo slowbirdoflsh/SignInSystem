@@ -24,11 +24,12 @@ public abstract class BaseDao<T> {
     /**
      * 数据库更新操作 --增加/删除/修改
      * 都可以通过该方法操作数据库
-     * @param sql 执行sql语句
+     *
+     * @param sql     执行sql语句
      * @param options sql语句占位参数
      * @return 更新操作是否成功
      */
-    protected Boolean update(String sql, Object...options) {
+    protected Boolean update(String sql, Object... options) {
         // 1. 获取数据库连接
         Connection connection = DBUtils.getConnection();
         // 2. 初始化执行语句
@@ -39,7 +40,7 @@ public abstract class BaseDao<T> {
             preparedStatement = connection.prepareStatement(sql);
             // 向执行语句填入参数
             for (int i = 0; i < options.length; i++) {
-                preparedStatement.setObject(i+1, options[i]);
+                preparedStatement.setObject(i + 1, options[i]);
             }
             // 获取更新行数
             rows = preparedStatement.executeUpdate();
@@ -57,9 +58,9 @@ public abstract class BaseDao<T> {
      * 数据库查询操作
      * 通过list参数控制查询数量(单个或多个)
      *
-     * @param sql sql语句
-     * @param clazz 指定获取实例类型
-     * @param list 存储查询多条数据时的内容
+     * @param sql     sql语句
+     * @param clazz   指定获取实例类型
+     * @param list    存储查询多条数据时的内容
      * @param options sql语句的占位参数
      * @return 单个实例 / null 内容在list
      */
@@ -75,7 +76,7 @@ public abstract class BaseDao<T> {
             preparedStatement = connection.prepareStatement(sql);
             if (options != null) {
                 for (int i = 0; i < options.length; i++) {
-                    preparedStatement.setObject(i+1, options[i]);
+                    preparedStatement.setObject(i + 1, options[i]);
                 }
             }
 

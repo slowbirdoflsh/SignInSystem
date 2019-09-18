@@ -14,7 +14,7 @@ import java.util.List;
  * @date 19-9-3 下午2:51
  */
 
-public class UserDtoTest {
+public class TestUserDto {
     public static void main(String[] args) {
         // test01();
         // test02();

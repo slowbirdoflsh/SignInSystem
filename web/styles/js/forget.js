@@ -19,5 +19,21 @@ function forget() {
         return false;
     }
 
-    return true;
+    var auth = $.cookie("cur_auth");
+    var data = {
+        method: "forget",
+        account: account,
+        name: name,
+        auth: auth
+    };
+
+    var res = false;
+    ajaxPost(data, function (xhr) {
+        alert(xhr.msg);
+        if (xhr.ret === "success") {
+            res = true;
+        }
+    });
+
+    return res;
 }

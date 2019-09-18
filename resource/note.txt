@@ -62,3 +62,7 @@ signDate 用户签到日期 varchar(50)
     在修改了比较重要的基础文件 尽量重新启动Tomcat 否则会出现NoSuchMethodError错误 无法识别已被修改的方法
 
 * 完成搜索功能
+
+
+log4j2使用 - ReggieDing的文章 - 知乎
+https://zhuanlan.zhihu.com/p/31472604

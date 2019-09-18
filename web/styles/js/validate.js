@@ -60,3 +60,36 @@ function checkName(obj) {
         checkNameResult.innerHTML = "";
     }
 }
+
+function valid(error_handle, success_handle) {
+    var id = $.cookie('id');
+    if (id === null || id.length <= 0) {
+        error_handle();
+        return;
+    }
+    var data = {
+        method: "valid",
+        id: id
+    };
+    ajaxPost(data, function (xhr) {
+        var ret = xhr.ret;
+        var msg = xhr.msg;
+        if (ret !== "success") {
+            // alert(msg);
+            error_handle();
+        } else if (ret === "success") {
+            success_handle();
+        }
+    });
+}
+
+/**
+ * 封装版 检验用户登录
+ */
+function are_you_login() {
+    valid(function () {
+        alert("抱歉, 请先登录!");
+        window.location.replace("login.jsp");
+    }, function () {
+    });
+}

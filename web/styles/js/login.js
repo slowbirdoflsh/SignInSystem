@@ -1,24 +1,81 @@
+/**
+ * 登录
+ * @returns {boolean}
+ */
 function login() {
-    // 首先. 对所输入的账号和密码进行判空
-    var account = document.getElementById("account").value;
-    var password = document.getElementById("password").value;
-    if (account.trim().length === 0) {
-        alert("账号不能为空!");
-        return false;
-    } else if (password.trim().length === 0) {
-        alert("密码不能为空!");
-        return false;
-    }
+    var account = $("#account").val();
+    var password = $("#password").val();
+    var auth = $("input:radio:checked").val();
+    var timestamp = new Date().getTime();
 
-    // 其次. 对账号和密码进行简单的格式判断
-    // 没有错误信息这表示通过
-    var r1 = document.getElementById("checkAccountResult").innerHTML.length;
-    var r2 = document.getElementById("checkPasswordResult").innerHTML.length;
-    if (r1 !== 0 || r2 !== 0) {
-        alert("账号或密码格式有误!");
-        return false;
-    }
+    save_cookies(account, password, auth, timestamp);
 
-    return true;
+    var res = false;
+    if (account !== "" && password !== "") {
+        $.ajax({
+            url: 'ajax/AjaxServlet',
+            type: 'post',
+            // 将Ajax设置为同步方式
+            async: false,
+            data: {
+                method: 'login',
+                account: account,
+                password: password,
+                auth: auth,
+                timestamp: timestamp
+            },
+            dataType: 'json',
+            success: function (args) {
+                var ret = args.ret;
+                var msg = args.msg;
+                console.log(args);
+                // alert("pause");
+                if (ret === "success") {
+                    res = true;
+                } else {
+                    console.log(args);
+                    alert(msg);
+                }
+            },
+            error: function (args) {
+                alert('ajax error!');
+                console.log(args);
+            }
+        })
+    } else {
+        alert("用户账号或密码不能为空!");
+    }
+    return res;
 }
 
+/**
+ * 记住密码功能
+ */
+function save_cookies(account, password, auth, timestamp) {
+    if ($("#rem").prop("checked")) {
+        $.cookie("rem", "true", {expires: 7});
+        $.cookie("account", account, {expires: 7});
+        $.cookie("password", password, {expires: 7});
+    } else {
+        $.cookie("rem", "false", {expires: -1});
+        $.cookie("account", "", {expires: -1});
+        $.cookie("password", "", {expires: -1});
+    }
+
+    // 传递到main.jsp界面
+    auth = $("input:radio:checked").val();
+    var id = auth + "#" + account + "#" + timestamp + "#";
+    $.cookie("id", id, {expires: 7});
+}
+
+/**
+ * 面向注册和忘记密码两个页面的cookie传值
+ */
+function set_cur_auth() {
+    auth = $("input:radio:checked").val();
+    $.cookie("cur_auth", auth, {expires: 7});
+}
+
+function del_cur_auth() {
+    $.cookie("cur_auth", "", {expires: -1});
+}

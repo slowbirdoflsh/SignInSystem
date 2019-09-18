@@ -21,6 +21,37 @@ function change() {
         return false;
     }
 
-    return true;
+    var arrs = getIdArrs();
+    var data = {
+        method: "change",
+        account: arrs[1],
+        auth: arrs[0],
+        password: password + "#" + password1
+    };
+
+    var res = false;
+    ajaxPost(data, function (xhr) {
+        alert(xhr.msg);
+        if (xhr.ret === "success") {
+            res = true;
+            alert("跳转到登录页面进行登录吧!");
+            logout();
+        }
+    });
+    return res;
 }
 
+function initChangeElements() {
+    var header = document.getElementById("header");
+    var arrs = getIdArrs();
+    var middle = "";
+    if (arrs[0] === "user") middle += "用户";
+    else if (arrs[0] === "admin") middle += "管理员";
+    middle += arrs[1];
+    header.innerHTML = "修改" + middle + "密码";
+}
+
+function getIdArrs() {
+    var id = $.cookie('id');
+    return id.split('#');
+}

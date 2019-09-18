@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * description
+ * 签到记录DAO类
+ * 具体实现类
  *
  * @author lingsh
  * @version 1.0

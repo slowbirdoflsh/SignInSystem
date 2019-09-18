@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * DTO具体实现类
  * 实现User bean类的持久化 增删查改
- *
+ * <p>
  * 实现接口定义的职责 使用BaseDao的工具
  * 尽量做到 "单一职责原则" 只有一个变量
  *
@@ -89,7 +89,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
         String sql = "select * from table_name where id=?";
         sql = sql.replace("table_name", table_name);
 
-        return query(sql, User.class,null, id);
+        return query(sql, User.class, null, id);
     }
 
     @Override

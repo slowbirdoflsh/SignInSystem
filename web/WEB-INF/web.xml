@@ -3,4 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!-- 声明servlet -->
+    <servlet>
+        <!-- servlet别名 -->
+        <servlet-name>AjaxServlet</servlet-name>
+        <!-- 该servlet所在类 -->
+        <servlet-class>com.lingsh.servlet.AjaxServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <!-- 指定Servlet 使用所声明的Servlet别名 -->
+        <servlet-name>AjaxServlet</servlet-name>
+        <!-- 拦截方式 localhost:8080/ajax/AjaxServlet 可以访问到 -->
+        <!-- 配置好的效果应该是 可以直接在游览器上访问(GET) 没有报错! -->
+        <url-pattern>/ajax/AjaxServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -14,11 +14,14 @@ import java.util.List;
 public class Test {
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("test");
-        System.out.println(list.get(0));
+        assert 6 < 5;
+        System.out.println("6 < 5");
+        assert 5 < 6;
+        System.out.println("5 < 6");
+    }
 
-        list.clear();
-        System.out.println(list.size());
+    private static String get(StringBuilder test) {
+        test.append("password");
+        return "success";
     }
 }
