@@ -1,0 +1,43 @@
+.login-form {
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: aqua;
+    opacity: 0.5;
+}
+
+div h2 {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.middle {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.important {
+    color: red;
+    margin: 10%;
+}
+
+.ajax-error-box {
+    min-height: 1.5rem;
+}
+
+.ajax-error {
+    color: red;
+    margin-top: .5rem;
+}
+
+.mb-2 {
+    margin-bottom: .5rem!important;
+}
+
+.btn {
+    width: 200px;
+    margin: 10%;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="WARN">
+    <!-- 日志输出路径 控制台/文件 -->
+    <Appenders>
+        <!-- 日志输出到控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <!-- 所有日志存放处 -->
+        <File name="log" fileName="StudentSignInSystem/logs/test.log" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+
+        <!-- 存放info级别日志 -->
+        <RollingFile name="RollingFileInfo" fileName="StudentSignInSystem/logs/info.log"
+                     filePattern="StudentSignInSystem/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <!--ThresholdFilter相当于拦截器 info以上的日志不会被拦截-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <!-- 存放warn级别日志 -->
+        <RollingFile name="RollingFileWarn" fileName="StudentSignInSystem/logs/warn.log"
+                     filePattern="StudentSignInSystem/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="Warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <!-- 存放error级别日志 -->
+        <RollingFile name="RollingFileError" fileName="StudentSignInSystem/logs/error.log"
+                     filePattern="StudentSignInSystem/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="log"/>
+            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="RollingFileWarn"/>
+            <AppenderRef ref="RollingFileError"/>
+        </Root>
+    </Loggers>
+</Configuration>
